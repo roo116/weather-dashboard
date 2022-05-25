@@ -13,47 +13,45 @@
 
 
 
-
-
-var apiUrl1= "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=10bdd765350b62b1d956051bc4e6292c"
-var apiUrl2 = "https://api.openweathermap.org/data/2.5/onecall"
-var inputEl = document.querySelector("input")
+// START commited on 5/24 11:26 pm //working
+var apiUrl1 =
+    "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=10bdd765350b62b1d956051bc4e6292c";
+var apiUrl2 = "https://api.openweathermap.org/data/2.5/onecall";
+var inputEl = document.querySelector("input");
 var btnEl = document.querySelector(".btn");
 
-btnEl.addEventListener("click", function(event) {
+btnEl.addEventListener("click", function (event) {
     event.preventDefault();
-    inputEl=inputEl.value
+    inputEl = inputEl.value;
     inputEl.trim();
-    var city = inputEl.toLowerCase()
+    var city = inputEl.toLowerCase();
     console.log(city);
-    
-}
-);
+});
+// End commited on 5/24 11:26 pm //working
+
+
+// return current conditions for city
 
 
 
-
-
+// NOT STARTED
 //get current weather
 //get 7-day forcast - 2-days
-
-//if city  = city in input box
 
 //return current conditions for city
 
 //return future conditions for city
 
-//capture in local storage for history 
+//capture in local storage for history
 
 // display in html
-
 
 // function getWeatherForcast ()
 
 // var getUserRepos = function(user) {
 //     // format the github api url
 //     // var apiUrl = 'https://api.github.com/users/' + user + '/repos';
-  
+
 //     // make a get request to url
 //     fetch(apiUrl)
 //       .then(function(response) {
