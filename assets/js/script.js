@@ -40,52 +40,61 @@ btnEl.addEventListener("click", function (event) {
 
   //build the query
   // apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + secret + "";
+}); //end of button click event function
 
-  // 1. fetch data
-  var testApi1 =
-    "https://api.openweathermap.org/data/2.5/weather?q=chapel%20hill&appid=10bdd765350b62b1d956051bc4e6292c";
-    var wData = ""
+// 1. fetch data
+var testCityName = "Chapel Hill";
+document.querySelector("#city-name").textContent = testCityName;
+var testApi1 =
+  "https://api.openweathermap.org/data/2.5/weather?q=chapel%20hill&appid=10bdd765350b62b1d956051bc4e6292c&units=imperial";
+var wData = "";
 
-  fetch(testApi1).then(function (response) {
-    if (response.ok) {
-      console.log(response);
-      response.json().then(function (data) {
-          wData = data;
-        console.log("this is ", wData);    
-      });
-    }
-  });
+fetch(testApi1).then(function (response) {
+  if (response.ok) {
+    console.log(response);
+    response.json().then(function (data) {
+      wData = data;
 
-//   construct the icon and get that out of the way
-var iconCode = wData.weather[0].icon;
-var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-var iconEl = document.createElement("img");
-iconEl.setAttribute("src", iconUrl);
-var wIiconEl = document.querySelector("#wIcon");
-wIiconEl.appendChild(iconEl);
-iconEl.setAttribute("src", iconUrl);
+      // construct the current weather card
 
+      // construct the City Name title of the card
 
+      //   construct the icon and get that out of the way
+      var iconCode = wData.weather[0].icon;
+      var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+      var iconEl = document.createElement("img");
+      iconEl.setAttribute("src", iconUrl);
+      var wIiconEl = document.querySelector("#current-icon");
+      wIiconEl.appendChild(iconEl);
+      iconEl.setAttribute("src", iconUrl);
 
+      //get temp
+      var currTemp = wData.main.temp;
+      var currHum = wData.main.humidity;
+      var currWind = wData.wind.speed;
 
-  // console.log(apiUrl2)
+     
+    });
+  }
+}); //end of fetch function for current weather card
 
-  // window.open(apiUrl2);
+// console.log(apiUrl2)
 
-  // START cuttent conditions card
-  // return cityName
-  // date -- jscript Date()
+// window.open(apiUrl2);
 
-  // from apiUrl2
-  // weather icon -- .weather.icon()
-  // temp -- .main.temp()
-  // wind -- .wind.speed()
-  // humidity -- .main.humidity()
-  // UV index
-  // chapel hill test -- current.uvi()
-  // https://api.openweathermap.org/data/2.5/onecall?lat=35.9132&lon=-79.0558&exclude=hourly,daily&appid=10bdd765350b62b1d956051bc4e6292c
-  //
-});
+// START cuttent conditions card
+// return cityName
+// date -- jscript Date()
+
+// from apiUrl2
+// weather icon -- .weather.icon()
+// temp -- .main.temp()
+// wind -- .wind.speed()
+// humidity -- .main.humidity()
+// UV index
+// chapel hill test -- current.uvi()
+// https://api.openweathermap.org/data/2.5/onecall?lat=35.9132&lon=-79.0558&exclude=hourly,daily&appid=10bdd765350b62b1d956051bc4e6292c
+//
 
 // NOT STARTED
 // get current weather
