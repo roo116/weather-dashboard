@@ -36,7 +36,7 @@ btnEl.addEventListener("click", function (event) {
         }
         var cityName = cityArr.join("");
     } else {
-        var cityName = inputEl;
+        var cityName = inputEl + "&";
     }
     console.log(cityName);
     document.getElementById("city-input").value=""
