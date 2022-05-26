@@ -11,9 +11,11 @@
 // THEN I am again presented with current and future conditions for that city
 
 
-var apiUrl1 =
-    "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=10bdd765350b62b1d956051bc4e6292c";
-var apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
+// var apiUrlFcast = "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=10bdd765350b62b1d956051bc4e6292c";
+// var apiUrlCurr = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
+// var apiUrlUvi = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}"
+
+
 var inputEl = document.querySelector("input");
 var btnEl = document.querySelector(".btn");
 var secret = "10bdd765350b62b1d956051bc4e6292c"
@@ -40,16 +42,40 @@ btnEl.addEventListener("click", function (event) {
 
 
     //build the query
-    apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + secret + "";
+    // apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + secret + "";
+
+    // 1. fetch data
+    var testApi1 = "https://api.openweathermap.org/data/2.5/weather?q=chapel%20hill&appid=10bdd765350b62b1d956051bc4e6292c";
+
+    fetch(testApi1).then(function (response) {
+        if (response.ok) {
+
+        }
+    })
+
+
+
     // console.log(apiUrl2)
 
-    window.open(apiUrl2);
+    // window.open(apiUrl2);
 
 
-    // return current conditions for city
-    // 1. build a query string from the city name in City.
-    // apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "appid=" + secret + "";
-    // console.log(apiUrl2);
+
+    // START cuttent conditions card
+    // return cityName
+    // date -- jscript Date()
+
+    // from apiUrl2
+    // weather icon -- .weather.icon()
+    // temp -- .main.temp()
+    // wind -- .wind.speed()
+    // humidity -- .main.humidity()
+    // UV index
+    // chapel hill test -- current.uvi()
+    // https://api.openweathermap.org/data/2.5/onecall?lat=35.9132&lon=-79.0558&exclude=hourly,daily&appid=10bdd765350b62b1d956051bc4e6292c
+    //
+
+
 
 
 
@@ -59,14 +85,14 @@ btnEl.addEventListener("click", function (event) {
 
 
 // NOT STARTED
-//get current weather
-//get 7-day forcast - 2-days
+// get current weather
+// get 7-day forcast - 2-days
 
-//return current conditions for city
+// return current conditions for city
 
-//return future conditions for city
+// return future conditions for city
 
-//capture in local storage for history
+// capture in local storage for history
 
 // display in html
 
