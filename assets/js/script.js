@@ -16,21 +16,56 @@
 // START commited on 5/24 11:26 pm //working
 var apiUrl1 =
     "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=10bdd765350b62b1d956051bc4e6292c";
-var apiUrl2 = "https://api.openweathermap.org/data/2.5/onecall";
+var apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
 var inputEl = document.querySelector("input");
 var btnEl = document.querySelector(".btn");
+var secret = "10bdd765350b62b1d956051bc4e6292c"
+var cityArr = []
 
 btnEl.addEventListener("click", function (event) {
     event.preventDefault();
     inputEl = inputEl.value;
+    console.log(inputEl);
     inputEl.trim();
-    var city = inputEl.toLowerCase();
-    console.log(city);
+    inputEl = inputEl.toLowerCase();
+    inputElArr = inputEl.split(" ");
+
+    if (inputElArr.length > 1) {
+        for (i = 0; i < inputElArr.length; i++) {
+            cityArr.push(inputElArr[i], "&")
+        }
+        var cityName = cityArr.join("");
+    } else {
+        var cityName = inputEl;
+    }
+    console.log(cityName);
+    document.getElementById("city-input").value=""
+
+    // if(inputEl.length > 1) {
+    //     for (i = 0; i < inputEl.length; i++) {
+    //         cityName = inputEl.concat([inputEl[i] + "&"]);
+    //     }
+
+
+
+
+
+
+
+
+
+    // End commited on 5/24 11:26 pm //working
+
+
+    // return current conditions for city
+    // 1. build a query string from the city name in City.
+    // apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "appid=" + secret + "";
+    // console.log(apiUrl2);
+
+
+
+
 });
-// End commited on 5/24 11:26 pm //working
-
-
-// return current conditions for city
 
 
 
