@@ -11,9 +11,6 @@
 // THEN I am again presented with current and future conditions for that city
 
 
-
-
-// START commited on 5/24 11:26 pm //working
 var apiUrl1 =
     "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=10bdd765350b62b1d956051bc4e6292c";
 var apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
@@ -28,33 +25,25 @@ btnEl.addEventListener("click", function (event) {
     console.log(inputEl);
     inputEl.trim();
     inputEl = inputEl.toLowerCase();
-    inputElArr = inputEl.split(" ");
+    // inputElArr = inputEl.split(" ");
 
-    if (inputElArr.length > 1) {
-        for (i = 0; i < inputElArr.length; i++) {
-            cityArr.push(inputElArr[i], "&")
-        }
-        var cityName = cityArr.join("");
-    } else {
-        var cityName = inputEl + "&";
-    }
-    console.log(cityName);
-    document.getElementById("city-input").value=""
-
-    // if(inputEl.length > 1) {
-    //     for (i = 0; i < inputEl.length; i++) {
-    //         cityName = inputEl.concat([inputEl[i] + "&"]);
+    // if (inputElArr.length > 1) {
+    //     for (i = 0; i < inputElArr.length; i++) {
+    //         cityArr.push(inputElArr[i], "&")
     //     }
+    //     var cityName = cityArr.join("");
+    // } else {
+    var cityName = inputEl;
+    // }
+    console.log(cityName);
+    document.getElementById("city-input").value = ""
 
 
+    //build the query
+    apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + secret + "";
+    // console.log(apiUrl2)
 
-
-
-
-
-
-
-    // End commited on 5/24 11:26 pm //working
+    window.open(apiUrl2);
 
 
     // return current conditions for city
