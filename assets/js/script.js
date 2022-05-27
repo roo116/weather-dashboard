@@ -18,6 +18,8 @@ var inputEl = document.querySelector("input");
 var btnEl = document.querySelector(".btn");
 var secret = "10bdd765350b62b1d956051bc4e6292c";
 var cityArr = [];
+var lat = "";
+var lon = "";
 
 btnEl.addEventListener("click", function (event) {
   event.preventDefault();
@@ -44,7 +46,10 @@ btnEl.addEventListener("click", function (event) {
 
 // 1. fetch data
 var testCityName = "Chapel Hill";
+var now = dayjs().format("MM/DD/YYYY");
+console.log("dayJs says now is " + now);
 document.querySelector("#city-name").textContent = testCityName;
+document.querySelector("#city-date").textContent = now;
 var testApi1 =
   "https://api.openweathermap.org/data/2.5/weather?q=chapel%20hill&appid=10bdd765350b62b1d956051bc4e6292c&units=imperial";
 var wData = "";
@@ -55,28 +60,56 @@ fetch(testApi1).then(function (response) {
     response.json().then(function (data) {
       wData = data;
 
-      // construct the current weather card
-
-      // construct the City Name title of the card
+      //need to caputure lat and lon of city, lets do that here
+      lon = wData.coord.lon;
+      lat = wData.coord.lat;
 
       //   construct the icon and get that out of the way
       var iconCode = wData.weather[0].icon;
       var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
       var iconEl = document.createElement("img");
       iconEl.setAttribute("src", iconUrl);
-      var wIiconEl = document.querySelector("#current-icon");
+      var wIiconEl = document.querySelector(".icon");
       wIiconEl.appendChild(iconEl);
       iconEl.setAttribute("src", iconUrl);
 
-      //get temp
+      //get temp, humdity, wind
       var currTemp = wData.main.temp;
-      var currHum = wData.main.humidity;
       var currWind = wData.wind.speed;
+      var currHum = wData.main.humidity;
 
-     
+      var tempEl = document.createElement("p");
+      var tempElTarget = document.querySelector("#current-temp");
+      tempElTarget.appendChild(tempEl);
+      tempElTarget.innerHTML = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176
+      console.log(tempElTarget);
+
+      var windEl = document.createElement("p");
+      var windElTarget = document.querySelector("#current-wind");
+      windElTarget.appendChild(windEl);
+      windElTarget.innerHTML = "Wind: " + currWind + " MPH";
+
+      var humEl = document.createElement("p");
+      var humElTarget = document.querySelector("#current-humidity");
+      humElTarget.appendChild(windEl);
+      humElTarget.innerHTML = "Humdity: " + currHum + "%";
+
+      //construct current conditions
     });
   }
-}); //end of fetch function for current weather card
+}); //end of fetch function for current weather everything except UVI
+
+
+
+// start of UVI fetch
+fetch(testApi2).then(function (response) {
+  if (response.ok) {
+    console.log(response);
+    response.json().then(function (data) {
+      wData = data;
+    });
+  }
+}); //end of fetch code for UVI
 
 // console.log(apiUrl2)
 
