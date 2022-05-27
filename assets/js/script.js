@@ -22,6 +22,35 @@ var lat = "";
 var lon = "";
 var units = "imperial";
 var lang = "en";
+var places = {};
+
+function init() {
+
+
+  places = JSON.parse(localStorage.getItem("places"));
+
+
+  if (!places) {
+    places = {
+      city: [],
+    };
+    return;
+  }
+};
+
+function storeHistory(name) {
+  // as soon as I hit enter on city save that to localStoragee
+  console.log("This is the location: ", name)
+  places.city.push(name)
+  console.log(places);
+  localStorage.setItem("places", JSON.stringify(places));
+
+}
+
+
+init();
+
+
 
 btnEl.addEventListener("click", function (event) {
   event.preventDefault();
@@ -29,24 +58,12 @@ btnEl.addEventListener("click", function (event) {
   console.log(inputEl);
   inputEl.trim();
   inputEl = inputEl.toLowerCase();
-  // inputElArr = inputEl.split(" ");
 
-  // if (inputElArr.length > 1) {
-  //     for (i = 0; i < inputElArr.length; i++) {
-  //         cityArr.push(inputElArr[i], "&")
-  //     }
-  //     var cityName = cityArr.join("");
-  // } else {
   var cityName = inputEl;
-  // }
+
   console.log(cityName);
   document.getElementById("city-input").value = "";
 
-  //build the query
-  // apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + secret + "";
-  //end of button click event function
-
-  // 1. fetch data
   var now = dayjs().format("MM/DD/YYYY");
   console.log("dayJs says now is " + now);
   document.querySelector("#city-name").textContent = cityName;
@@ -59,6 +76,8 @@ btnEl.addEventListener("click", function (event) {
     if (response.ok) {
       console.log(response);
       response.json().then(function (data) {
+        storeHistory(cityName);
+        debugger;
         wData = data;
 
         //   construct the icon and get that out of the way
@@ -143,11 +162,8 @@ btnEl.addEventListener("click", function (event) {
               //create 5 day forcast html
 
               for (i = 1; i < 6; i++) {
-                //.dt = date
                 dailyDate = wData2.daily[i].dt
-                // console.log(dailyDate);
                 dailyDate = dayjs.unix(dailyDate).format("MM/DD/YYYY");
-                // document.createElement("p");
                 document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = dailyDate;
 
                 dailyIcon = wData2.daily[i].weather[0].icon
@@ -156,81 +172,24 @@ btnEl.addEventListener("click", function (event) {
 
                 temp = wData2.daily[i].temp.day;
                 document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Temp: " + temp + "°F";
-                // console.log(temp);
+
                 wind = wData2.daily[i].wind_speed;
                 document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Wind: " + wind + " MPH";
-                // console.log(wind);
+                ;
                 hum = wData2.daily[i].humidity
                 document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Humidity: " + hum + " %";
-
-
-
-
-
-                //.temp.day = temp
-                //.weather[0].icon = icon
-                //.wind_speed = wind speed
-                //take this data and create card data in html
               }
-
-
-
-
-
-
-
             })
           }
         })
 
       });
     }
-  }); //end of fetch function for current weather everything except UVI
-});
+  });
+}); //end of working code
 
+//START - history buttons
 
-
-// // start of UVI fetch
-// fetch(testApi2).then(function (response) {
-//   if (response.ok) {
-//     console.log(response);
-//     response.json().then(function (data) {
-//       wData = data;
-//     });
-//   }
-// }); //end of fetch code for UVI
-
-// console.log(apiUrl2)
-
-// window.open(apiUrl2);
-
-// START cuttent conditions card
-// return cityName
-// date -- jscript Date()
-
-// from apiUrl2
-// weather icon -- .weather.icon()
-// temp -- .main.temp()
-// wind -- .wind.speed()
-// humidity -- .main.humidity()
-// UV index
-// chapel hill test -- current.uvi()
-// https://api.openweathermap.org/data/2.5/onecall?lat=35.9132&lon=-79.0558&exclude=hourly,daily&appid=10bdd765350b62b1d956051bc4e6292c
-//
-
-// NOT STARTED
-// get current weather
-// get 7-day forcast - 2-days
-
-// return current conditions for city
-
-// return future conditions for city
-
-// capture in local storage for history
-
-// display in html
-
-// function getWeatherForcast ()
 
 // var getUserRepos = function(user) {
 //     // format the github api url
@@ -253,3 +212,13 @@ btnEl.addEventListener("click", function (event) {
 //       .catch(function(error) {
 //         alert('Unable to connect to GitHub');
 //       });
+
+
+
+
+
+
+
+
+
+
