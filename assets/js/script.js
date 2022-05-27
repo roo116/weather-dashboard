@@ -109,27 +109,33 @@ btnEl.addEventListener("click", function (event) {
               var uviEl = document.createElement("p");
               var uviTarget = document.querySelector("#current-uvi");
               uviTarget.appendChild(uviEl);
-              uviTarget.innerHTML = "UV Index: <span class='rating'>" + currUvi + "</span>";
+              uviTarget.innerHTML = "UV Index: " + "<span class='rating'>" + currUvi + "</span>";
               rating = Math.floor(currUvi)
+
 
               if (rating >= 0 && rating <= 2) {
                 console.log("green")
+                document.querySelector("span").setAttribute("style", "background-color: green");
               };
 
               if (rating > 2 && rating <= 5) {
                 console.log("yellow")
+                document.querySelector("span").setAttribute("style", "background-color: yellow");
               };
 
               if (rating > 5 && rating <= 7) {
                 console.log("orange");
+                document.querySelector("span").setAttribute("style", "background-color: orange");
               };
 
               if (rating > 7 && rating <= 10) {
                 console.log("red");
+                document.querySelector("span").setAttribute("style", "background-color: red");
               };
 
               if (rating > 11) {
                 console.log("purple");
+                document.querySelector("span").setAttribute("style", "background-color: purple");
               };
 
 
