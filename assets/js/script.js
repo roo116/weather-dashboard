@@ -109,11 +109,34 @@ btnEl.addEventListener("click", function (event) {
               var uviEl = document.createElement("p");
               var uviTarget = document.querySelector("#current-uvi");
               uviTarget.appendChild(uviEl);
-              uviTarget.innerHTML = "UV Index: " + currUvi;
+              uviTarget.innerHTML = "UV Index: <span class='rating'>" + currUvi + "</span>";
+              rating = Math.floor(currUvi)
+
+              if (rating >= 0 && rating <= 2) {
+                console.log("green")
+              };
+
+              if (rating > 2 && rating <= 5) {
+                console.log("yellow")
+              };
+
+              if (rating > 5 && rating <= 7) {
+                console.log("orange");
+              };
+
+              if (rating > 7 && rating <= 10) {
+                console.log("red");
+              };
+
+              if (rating > 11) {
+                console.log("purple");
+              };
+
+
 
               //create 5 day forcast html
 
-              for (i = 0; i < 5; i++) {
+              for (i = 1; i < 6; i++) {
                 //.dt = date
                 dailyDate = wData2.daily[i].dt
                 // console.log(dailyDate);
