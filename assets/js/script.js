@@ -78,7 +78,7 @@ btnEl.addEventListener("click", function (event) {
         var tempEl = document.createElement("p");
         var tempElTarget = document.querySelector("#current-temp");
         tempElTarget.appendChild(tempEl);
-        tempElTarget.innerHTML = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176
+        tempElTarget.innerHTML = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176 for PC. Option-Shift-8 for mac
         console.log(tempElTarget);
 
         var windEl = document.createElement("p");
@@ -109,20 +109,42 @@ btnEl.addEventListener("click", function (event) {
               var uviEl = document.createElement("p");
               var uviTarget = document.querySelector("#current-uvi");
               uviTarget.appendChild(uviEl);
-              uviTarget.innerHTML = "UV Index " + currUvi;
+              uviTarget.innerHTML = "UV Index: " + currUvi;
 
-              // for (i=0; i <= 5; i++) {
-              //   //.dt = date
-              //   date = wData2[i].dt
-              //   temp - wData2[i].temp.day
-              //   wind = wData2[i].
-              //   //.temp.day = temp
-              //   //.weather[0].icon = icon
-              //   //.wind_speed = wind speed
-              //   //take this data and create card data in html
+              //create 5 day forcast html
+
+              for (i = 0; i < 5; i++) {
+                //.dt = date
+                dailyDate = wData2.daily[i].dt
+                // console.log(dailyDate);
+                dailyDate = dayjs.unix(dailyDate).format("MM/DD/YYYY");
+                // document.createElement("p");
+                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = dailyDate;
+
+                dailyIcon = wData2.daily[i].weather[0].icon
+                var iconUrl = `http://openweathermap.org/img/w/${dailyIcon}.png`;
+                document.querySelector("#d" + [i]).appendChild(document.createElement("img")).setAttribute("src", iconUrl);
+
+                temp = wData2.daily[i].temp.day;
+                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Temp: " + temp + "°F";
+                // console.log(temp);
+                wind = wData2.daily[i].wind_speed;
+                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Wind: " + wind + " MPH";
+                // console.log(wind);
+                hum = wData2.daily[i].humidity
+                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Humidity: " + hum + " %";
 
 
-              // }
+
+
+
+                //.temp.day = temp
+                //.weather[0].icon = icon
+                //.wind_speed = wind speed
+                //take this data and create card data in html
+              }
+
+
 
 
 
