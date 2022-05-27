@@ -20,6 +20,8 @@ var secret = "10bdd765350b62b1d956051bc4e6292c";
 var cityArr = [];
 var lat = "";
 var lon = "";
+var units = "imperial";
+var lang = "en";
 
 btnEl.addEventListener("click", function (event) {
   event.preventDefault();
@@ -42,74 +44,110 @@ btnEl.addEventListener("click", function (event) {
 
   //build the query
   // apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + secret + "";
-}); //end of button click event function
+  //end of button click event function
 
-// 1. fetch data
-var testCityName = "Chapel Hill";
-var now = dayjs().format("MM/DD/YYYY");
-console.log("dayJs says now is " + now);
-document.querySelector("#city-name").textContent = testCityName;
-document.querySelector("#city-date").textContent = now;
-var testApi1 =
-  "https://api.openweathermap.org/data/2.5/weather?q=chapel%20hill&appid=10bdd765350b62b1d956051bc4e6292c&units=imperial";
-var wData = "";
+  // 1. fetch data
+  var now = dayjs().format("MM/DD/YYYY");
+  console.log("dayJs says now is " + now);
+  document.querySelector("#city-name").textContent = cityName;
+  document.querySelector("#city-date").textContent = now;
+  var apiUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${secret}&units=${units}`;
+  var wData = "";
 
-fetch(testApi1).then(function (response) {
-  if (response.ok) {
+  fetch(apiUrl1).then(function (response) {
     console.log(response);
-    response.json().then(function (data) {
-      wData = data;
+    if (response.ok) {
+      console.log(response);
+      response.json().then(function (data) {
+        wData = data;
 
-      //need to caputure lat and lon of city, lets do that here
-      lon = wData.coord.lon;
-      lat = wData.coord.lat;
+        //   construct the icon and get that out of the way
+        var iconCode = wData.weather[0].icon;
+        var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        var iconEl = document.createElement("img");
+        iconEl.setAttribute("src", iconUrl);
+        var wIiconEl = document.querySelector(".icon");
+        wIiconEl.appendChild(iconEl);
+        iconEl.setAttribute("src", iconUrl);
 
-      //   construct the icon and get that out of the way
-      var iconCode = wData.weather[0].icon;
-      var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-      var iconEl = document.createElement("img");
-      iconEl.setAttribute("src", iconUrl);
-      var wIiconEl = document.querySelector(".icon");
-      wIiconEl.appendChild(iconEl);
-      iconEl.setAttribute("src", iconUrl);
+        //get temp, humdity, wind
+        var currTemp = wData.main.temp;
+        var currWind = wData.wind.speed;
+        var currHum = wData.main.humidity;
 
-      //get temp, humdity, wind
-      var currTemp = wData.main.temp;
-      var currWind = wData.wind.speed;
-      var currHum = wData.main.humidity;
+        var tempEl = document.createElement("p");
+        var tempElTarget = document.querySelector("#current-temp");
+        tempElTarget.appendChild(tempEl);
+        tempElTarget.innerHTML = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176
+        console.log(tempElTarget);
 
-      var tempEl = document.createElement("p");
-      var tempElTarget = document.querySelector("#current-temp");
-      tempElTarget.appendChild(tempEl);
-      tempElTarget.innerHTML = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176
-      console.log(tempElTarget);
+        var windEl = document.createElement("p");
+        var windElTarget = document.querySelector("#current-wind");
+        windElTarget.appendChild(windEl);
+        windElTarget.innerHTML = "Wind: " + currWind + " MPH";
 
-      var windEl = document.createElement("p");
-      var windElTarget = document.querySelector("#current-wind");
-      windElTarget.appendChild(windEl);
-      windElTarget.innerHTML = "Wind: " + currWind + " MPH";
+        var humEl = document.createElement("p");
+        var humElTarget = document.querySelector("#current-humidity");
+        humElTarget.appendChild(windEl);
+        humElTarget.innerHTML = "Humdity: " + currHum + "%";
 
-      var humEl = document.createElement("p");
-      var humElTarget = document.querySelector("#current-humidity");
-      humElTarget.appendChild(windEl);
-      humElTarget.innerHTML = "Humdity: " + currHum + "%";
+        //need to caputure lat and lon of city, lets do that here
+        lon = wData.coord.lon;
+        lat = wData.coord.lat;
 
-      //construct current conditions
-    });
-  }
-}); //end of fetch function for current weather everything except UVI
+        var apiUrl2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${secret}&units=${units}&lang=${lang}`
+        fetch(apiUrl2).then(function (response) {
+          console.log("apiUrl2 " + response);
+          if (!response.ok) {
+            console.error(response);
+            return;
+          }
+          if (response.ok) {
+            response.json().then(function (data) {
+              wData2 = data;
+              var currUvi = wData2.current.uvi
+              var uviEl = document.createElement("p");
+              var uviTarget = document.querySelector("#current-uvi");
+              uviTarget.appendChild(uviEl);
+              uviTarget.innerHTML = "UV Index " + currUvi;
+
+              // for (i=0; i <= 5; i++) {
+              //   //.dt = date
+              //   date = wData2[i].dt
+              //   temp - wData2[i].temp.day
+              //   wind = wData2[i].
+              //   //.temp.day = temp
+              //   //.weather[0].icon = icon
+              //   //.wind_speed = wind speed
+              //   //take this data and create card data in html
+
+
+              // }
 
 
 
-// start of UVI fetch
-fetch(testApi2).then(function (response) {
-  if (response.ok) {
-    console.log(response);
-    response.json().then(function (data) {
-      wData = data;
-    });
-  }
-}); //end of fetch code for UVI
+
+
+            })
+          }
+        })
+
+      });
+    }
+  }); //end of fetch function for current weather everything except UVI
+});
+
+
+
+// // start of UVI fetch
+// fetch(testApi2).then(function (response) {
+//   if (response.ok) {
+//     console.log(response);
+//     response.json().then(function (data) {
+//       wData = data;
+//     });
+//   }
+// }); //end of fetch code for UVI
 
 // console.log(apiUrl2)
 
