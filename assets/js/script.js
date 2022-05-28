@@ -14,7 +14,7 @@
 // var apiUrlCurr = "https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}";
 // var apiUrlUvi = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}"
 
-var inputEl = document.querySelector("input");
+var cityName = ""
 var btnEl = document.querySelector(".btn");
 var secret = "10bdd765350b62b1d956051bc4e6292c";
 var cityArr = [];
@@ -41,6 +41,8 @@ function init() {
   // I want to get the most recent entries from object
   // I want to not show duplicates
   //got this from stack overflow, how to remove duplicates from an array
+
+  //HELPER FUNCTION -- createHistory()
   var tempOut = [];
   var tempObj = {};
   places.city.reverse();
@@ -82,6 +84,7 @@ function init() {
     buttonEl.textContent = cityArr;
     targEl.appendChild(buttonEl);
   })
+  // END createHistory
 
 
 
@@ -124,15 +127,21 @@ init();
 
 btnEl.addEventListener("click", function (event) {
   event.preventDefault();
-  inputEl = inputEl.value;
-  console.log(inputEl);
-  inputEl.trim();
-  inputEl = inputEl.toLowerCase();
 
-  var cityName = inputEl;
+  // inputEl = document.querySelector("input");
+  // inputEl = inputEl.value;
+  // console.log(inputEl);
+  // inputEl.trim();
+  // inputEl = inputEl.toLowerCase();
 
-  console.log(cityName);
-  document.getElementById("city-input").value = "";
+  cityName = document.querySelector("input");
+  cityName = cityName.value.trim()
+  cityName = cityName.toLowerCase();
+
+  document.querySelector("input").value = "";
+
+
+
 
   var now = dayjs().format("MM/DD/YYYY");
   console.log("dayJs says now is " + now);
@@ -150,12 +159,19 @@ btnEl.addEventListener("click", function (event) {
         wData = data;
 
         //   construct the icon and get that out of the way
+        // var iconCode = wData.weather[0].icon;
+        // var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        // var iconEl = document.createElement("img");
+        // iconEl.setAttribute("src", iconUrl);
+        // var wIiconEl = document.querySelector(".icon");
+        // wIiconEl.appendChild(iconEl);
+
         var iconCode = wData.weather[0].icon;
         var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
         var iconEl = document.createElement("img");
-        iconEl.setAttribute("src", iconUrl);
-        var wIiconEl = document.querySelector(".icon");
-        wIiconEl.appendChild(iconEl);
+        document.querySelector("#icon-url").src = iconUrl;
+
+
 
 
         //get temp, humdity, wind
@@ -163,21 +179,21 @@ btnEl.addEventListener("click", function (event) {
         var currWind = wData.wind.speed;
         var currHum = wData.main.humidity;
 
-        var tempEl = document.createElement("p");
+        // var tempEl = document.createElement("p");
         var tempElTarget = document.querySelector("#current-temp");
-        tempElTarget.appendChild(tempEl);
-        tempElTarget.innerHTML = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176 for PC. Option-Shift-8 for mac
-        console.log(tempElTarget);
+        // tempElTarget.appendChild(tempEl);
+        tempElTarget.textContent = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176 for PC. Option-Shift-8 for mac
+        // console.log(tempElTarget);
 
-        var windEl = document.createElement("p");
+        // var windEl = document.createElement("p");
         var windElTarget = document.querySelector("#current-wind");
-        windElTarget.appendChild(windEl);
-        windElTarget.innerHTML = "Wind: " + currWind + " MPH";
+        // windElTarget.appendChild(windEl);
+        windElTarget.textContent = "Wind: " + currWind + " MPH";
 
-        var humEl = document.createElement("p");
+        // var humEl = document.createElement("p");
         var humElTarget = document.querySelector("#current-humidity");
-        humElTarget.appendChild(windEl);
-        humElTarget.innerHTML = "Humdity: " + currHum + "%";
+        // humElTarget.appendChild(windEl);
+        humElTarget.textContent = "Humdity: " + currHum + "%";
 
         //need to caputure lat and lon of city, lets do that here
         lon = wData.coord.lon;
@@ -233,20 +249,20 @@ btnEl.addEventListener("click", function (event) {
               for (i = 1; i < 6; i++) {
                 dailyDate = wData2.daily[i].dt
                 dailyDate = dayjs.unix(dailyDate).format("MM/DD/YYYY");
-                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = dailyDate;
+                document.querySelector("#date" + [i]).textContent = dailyDate;
 
                 dailyIcon = wData2.daily[i].weather[0].icon
                 var iconUrl = `http://openweathermap.org/img/w/${dailyIcon}.png`;
-                document.querySelector("#d" + [i]).appendChild(document.createElement("img")).setAttribute("src", iconUrl);
+                document.querySelector("#img-d" + [i]).src = iconUrl;
 
                 temp = wData2.daily[i].temp.day;
-                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Temp: " + temp + "°F";
+                document.querySelector("#tmp-d" + [i]).textContent = "Temp: " + temp + "°F";
 
                 wind = wData2.daily[i].wind_speed;
-                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Wind: " + wind + " MPH";
+                document.querySelector("#wind-d" + [i]).textContent = "Wind: " + wind + " MPH";
                 ;
                 hum = wData2.daily[i].humidity
-                document.querySelector("#d" + [i]).appendChild(document.createElement("p")).textContent = "Humidity: " + hum + " %";
+                document.querySelector("#hum-d" + [i]).textContent = "Humidity: " + hum + " %";
               }
             })
           }
@@ -281,6 +297,8 @@ btnEl.addEventListener("click", function (event) {
 //       .catch(function(error) {
 //         alert('Unable to connect to GitHub');
 //       });
+
+
 
 
 
