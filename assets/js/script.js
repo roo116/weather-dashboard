@@ -28,7 +28,7 @@ function init() {
 
 
   places = JSON.parse(localStorage.getItem("places"));
-  console.log(places);  
+  console.log(places);
 
 
   if (!places) {
@@ -51,21 +51,62 @@ function init() {
   for (i in tempObj) {
     tempOut.push(i);
   }
-  console.log(tempOut);
+  console.log("tempOut = ", tempOut);
 
 
   // create buttons
 
 
-  //   for(i=0; i<places.length || i < 7; i++) {
 
-  //   }
-  //   historyBtn = document.createElement("button");
-  // document.appendChild(historyBtn)
+  var targEl = document.querySelector("#history-section");
+  // var buttonEl = document.createElement("button");
+
+
+  if (tempOut.length > 7) {
+    var len = 7;
+    for (i = 0; i < len; i++) {
+      cityArr.push(tempOut[i]);
+    }
+  } else {
+    cityArr = tempOut
+  };
+
+  console.log("cityArr = ", cityArr);
+
+  idx = cityArr.length;
+
+  cityArr.forEach(function (cityArr) {
+    console.log()
+    var buttonEl = document.createElement("button");
+    buttonEl.setAttribute("class", "btn btn-secondary");
+    buttonEl.textContent = cityArr;
+    targEl.appendChild(buttonEl);
+  })
 
 
 
 };
+
+// for (i = 0; i < len; i++) {
+//   var targEl = document.querySelector("#history-section");
+//   buttonEl.setAttribute("id", "button-" + [i]);
+//   targEl.appendChild(buttonEl;
+//   buttonEl.innerHTML = tempOut[i];
+
+// }
+
+
+
+
+//   for(i=0; i<places.length || i < 7; i++) {
+
+//   }
+//   historyBtn = document.createElement("button");
+// document.appendChild(historyBtn)
+
+
+
+
 
 function storeHistory(name) {
   // as soon as I hit enter on city save that to localStoragee
@@ -115,7 +156,7 @@ btnEl.addEventListener("click", function (event) {
         iconEl.setAttribute("src", iconUrl);
         var wIiconEl = document.querySelector(".icon");
         wIiconEl.appendChild(iconEl);
-        iconEl.setAttribute("src", iconUrl);
+
 
         //get temp, humdity, wind
         var currTemp = wData.main.temp;
