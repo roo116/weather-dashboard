@@ -28,6 +28,7 @@ function init() {
 
 
   places = JSON.parse(localStorage.getItem("places"));
+  console.log(places);  
 
 
   if (!places) {
@@ -36,6 +37,34 @@ function init() {
     };
     return;
   }
+
+  // I want to get the most recent entries from object
+  // I want to not show duplicates
+  //got this from stack overflow, how to remove duplicates from an array
+  var tempOut = [];
+  var tempObj = {};
+  places.city.reverse();
+
+  for (i = 0; i < places.city.length; i++) {
+    tempObj[places.city[i]] = 0;
+  }
+  for (i in tempObj) {
+    tempOut.push(i);
+  }
+  console.log(tempOut);
+
+
+  // create buttons
+
+
+  //   for(i=0; i<places.length || i < 7; i++) {
+
+  //   }
+  //   historyBtn = document.createElement("button");
+  // document.appendChild(historyBtn)
+
+
+
 };
 
 function storeHistory(name) {
@@ -77,7 +106,6 @@ btnEl.addEventListener("click", function (event) {
       console.log(response);
       response.json().then(function (data) {
         storeHistory(cityName);
-        debugger;
         wData = data;
 
         //   construct the icon and get that out of the way
