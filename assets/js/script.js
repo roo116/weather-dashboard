@@ -23,12 +23,14 @@ var lon = "";
 var units = "imperial";
 var lang = "en";
 var places = {};
+var locationButtonsEl = document.querySelector("#location-buttons");
+var placeHolderErrorTxt = "Make sure you enter a city name and that it's a real city."
+var placeHolderResetTxt = "Enter City Name Here"
 
 function init() {
 
 
   places = JSON.parse(localStorage.getItem("places"));
-  console.log(places);
 
 
   if (!places) {
@@ -117,22 +119,51 @@ function init() {
 
 
 function storeHistory(name) {
+
+  places = JSON.parse(localStorage.getItem("places"));
+
+
+  if (!places) {
+    places = {
+      city: [],
+    };
+  }
+
+  console.log(places);;
+  var tempObj = {};
+  var tempArr = []
+  // places.city.reverse();
+
+  for (i = 0; i < places.city.length; i++) {
+    tempObj[places.city[i]] = 0;
+  }
+  for (i in tempObj) {
+    tempArr.push(i);
+  }
+  console.log("tempArr = ", tempArr);
+
+  cityArr = tempArr;
+
   // as soon as I hit enter on city save that to localStoragee
   console.log("This is the location: ", name)
-  places.city.push(name)
-  console.log(places);
-  localStorage.setItem("places", JSON.stringify(places));
-  document
+  console.log("Console loggin ", places);
+  // document
 
   //and create a history button
 
   var histBtnTarget = document.getElementsByClassName("btn city-btn");
   for (i = 0; i < histBtnTarget.length; i++) {
-    cityArr.push(histBtnTarget[i].innerHTML);
-    console.log(cityArr);
-    if (cityArr[i] === "") {
+    var tempCity = cityArr[i]
+    if (!tempCity) {
+      console.log("this element is blank so create a button");
+      return;
+    }
+
+    if (tempCity !== name) {
       cityArr[i] = name;
       histBtnTarget[i].innerHTML = cityArr[i];
+      histBtnTarget[i].dataset.location = cityArr[i];
+      localStorage.setItem("places", JSON.stringify(places));
       break;
     }
 
@@ -163,6 +194,26 @@ function storeHistory(name) {
 
 init();
 
+function getWeather(location) {
+  console.log(location);
+};
+
+function buttonClickHandler(event) {
+  var location = event.target.getAttribute("data-location");
+  console.log("I clicked this ", location)
+
+  if (location) {
+    getWeather(location);
+
+    // clear old content
+    // repoContainerEl.textContent = "";
+  }
+};
+
+locationButtonsEl.addEventListener("click", buttonClickHandler);
+
+
+
 
 
 btnEl.addEventListener("click", function (event) {
@@ -174,26 +225,40 @@ btnEl.addEventListener("click", function (event) {
   // inputEl.trim();
   // inputEl = inputEl.toLowerCase();
 
+
   cityName = document.querySelector("input");
   cityName = cityName.value.trim()
   cityName = cityName.toLowerCase();
 
-  document.querySelector("input").value = "";
-
 
 
   // getWeatherFunction
-  var now = dayjs().format("MM/DD/YYYY");
-  console.log("dayJs says now is " + now);
-  document.querySelector("#city-name").textContent = cityName;
-  document.querySelector("#city-date").textContent = now;
+  // var now = dayjs().format("MM/DD/YYYY");
+  // console.log("dayJs says now is " + now);
+  // document.querySelector("#city-name").textContent = cityName;
+  // document.querySelector("#city-date").textContent = now;
   var apiUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${secret}&units=${units}`;
   var wData = "";
 
   fetch(apiUrl1).then(function (response) {
-    console.log(response);
+    if (!response.ok) {
+      document.querySelector("input").value = "";
+      document.querySelector("input").placeholder = placeHolderErrorTxt;
+      return;
+    }
+
     if (response.ok) {
-      console.log(response);
+
+      document.querySelector("input").value = "";
+      document.querySelector("input").placeholder = placeHolderResetTxt;
+
+
+      var now = dayjs().format("MM/DD/YYYY");
+      console.log("dayJs says now is " + now);
+      document.querySelector("#city-name").textContent = cityName;
+      document.querySelector("#city-date").textContent = now;
+
+
       response.json().then(function (data) {
         storeHistory(cityName);
         wData = data;
