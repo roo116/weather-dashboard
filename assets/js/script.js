@@ -125,16 +125,40 @@ function storeHistory(name) {
   document
 
   //and create a history button
-   newbtnEl = document.createElement("button");
-   netbtnEl = 
 
-  //  var language = event.target.getAttribute("data-location");
+  var histBtnTarget = document.getElementsByClassName("btn city-btn");
+  for (i = 0; i < histBtnTarget.length; i++) {
+    cityArr.push(histBtnTarget[i].innerHTML);
+    console.log(cityArr);
+    if (cityArr[i] === "") {
+      cityArr[i] = name;
+      histBtnTarget[i].innerHTML = cityArr[i];
+      break;
+    }
 
-  // newbtnEl.setAttribute("class", "btn btn-secondary");
-  // newbtnEl.textContent = name;
-  // document.getElementById("history-section").childNodes.addAt(0, newbtnEl);
+    //get all items in array and if any of them match 'name' then put set that one to [0] and break;
+    // if it's not equal to that one then add the new name to the [0] location and remove the [7] location.
+    // create event listeners like I did in the code quiz challenge.  attach those to the function getWeather Function and create the getWeather function.
 
-}
+
+    //   histBtnTarget[i].innerHTML = name;
+    //   debugger;
+    //   break;
+    // } else {
+
+
+    // }
+
+
+
+    //  var language = event.target.getAttribute("data-location");
+
+    // newbtnEl.setAttribute("class", "btn btn-secondary");
+    // newbtnEl.textContent = name;
+    // document.getElementById("history-section").childNodes.addAt(0, newbtnEl);
+
+  }
+};
 
 
 init();
@@ -158,7 +182,7 @@ btnEl.addEventListener("click", function (event) {
 
 
 
-
+  // getWeatherFunction
   var now = dayjs().format("MM/DD/YYYY");
   console.log("dayJs says now is " + now);
   document.querySelector("#city-name").textContent = cityName;
