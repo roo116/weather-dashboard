@@ -18,6 +18,7 @@ var cityName = ""
 var btnEl = document.querySelector(".btn");
 var secret = "10bdd765350b62b1d956051bc4e6292c";
 var cityArr = [];
+var btnArr = [];
 var lat = "";
 var lon = "";
 var units = "imperial";
@@ -152,51 +153,75 @@ function storeHistory(name) {
   // document
 
   //and create a history button
-
+ 
   for (i = 0; i < histBtnTarget.length; i++) {
-    var tempCity = cityArr[i];
-    console.log("temp city = ", tempCity)
-    if (!tempCity) {
-      console.log("this element is blank so create a button");
-      histBtnTarget[i].innerHTML = name;
-      histBtnTarget[i].dataset.location = name;
-      places.city[i] = name
-      localStorage.setItem("places", JSON.stringify(places));
-      return;
+    if (!histBtnTarget[i].dataset.location) {
+      btnArr.push(histBtnTarget[i]);
     }
 
-    if (tempCity === name) {
-      console.log("this city already has a button so we're done here")
-      // cityArr[i] = name;
-      // histBtnTarget[i].innerHTML = cityArr[i];
-      // histBtnTarget[i].dataset.location = cityArr[i];
-      // localStorage.setItem("places", JSON.stringify(places));
-      break;
-    }
+    //   if (histBtnTarget[i].dataset.location = "") {
+    //     console.log(histBtnTarget)
+    //     btnArr.push(histBtnTarget[i]);
 
-    //get all items in array and if any of them match 'name' then put set that one to [0] and break;
-    // if it's not equal to that one then add the new name to the [0] location and remove the [7] location.
-    // create event listeners like I did in the code quiz challenge.  attach those to the function getWeather Function and create the getWeather function.
+    //     console.log(btnArr);
+
+    //   }
+
+    //   // console.log("temp city = ", tempCity)
+    //   // if (!tempCity) {
+    //   //   console.log("this element is blank so create a button");
+    //   //   histBtnTarget[i].innerHTML = name;
+    //   //   histBtnTarget[i].dataset.location = name;
+    //   //   places.city[i] = name
+    //   //   localStorage.setItem("places", JSON.stringify(places));
+    //   //   return;
+    //   // }
+    //   // if (tempCity === name) {
+    //   //   console.log("this city already has a button so we're done here")
+    //   //   // cityArr[i] = name;
+    //   //   // histBtnTarget[i].innerHTML = cityArr[i];
+    //   //   // histBtnTarget[i].dataset.location = cityArr[i];
+    //   //   // localStorage.setItem("places", JSON.stringify(places));
+    //   //   return;
+    //   // }
+
+    //   // console.log("Ok we need to create an addtional button")
+    //   // // get the next button in the array
+    //   // histBtnTarget[i].innerHTML = name;
+    //   // histBtnTarget[i].dataset.location = name;
 
 
-    //   histBtnTarget[i].innerHTML = name;
-    //   debugger;
-    //   break;
-    // } else {
-
-
-    // }
 
 
 
-    //  var language = event.target.getAttribute("data-location");
 
-    // newbtnEl.setAttribute("class", "btn btn-secondary");
-    // newbtnEl.textContent = name;
-    // document.getElementById("history-section").childNodes.addAt(0, newbtnEl);
+
+
+
 
   }
 };
+
+//get all items in array and if any of them match 'name' then put set that one to [0] and break;
+// if it's not equal to that one then add the new name to the [0] location and remove the [7] location.
+// create event listeners like I did in the code quiz challenge.  attach those to the function getWeather Function and create the getWeather function.
+
+
+//   histBtnTarget[i].innerHTML = name;
+//   debugger;
+//   break;
+// } else {
+
+
+// }
+
+
+
+//  var language = event.target.getAttribute("data-location");
+
+// newbtnEl.setAttribute("class", "btn btn-secondary");
+// newbtnEl.textContent = name;
+// document.getElementById("history-section").childNodes.addAt(0, newbtnEl);
 
 
 init();
@@ -267,8 +292,7 @@ btnEl.addEventListener("click", function (event) {
 
 
       response.json().then(function (data) {
-        console.log(cityName)
-        debugger;
+        console.log(cityName);
         storeHistory(cityName);
         wData = data;
 
@@ -411,15 +435,3 @@ btnEl.addEventListener("click", function (event) {
 //       .catch(function(error) {
 //         alert('Unable to connect to GitHub');
 //       });
-
-
-
-
-
-
-
-
-
-
-
-
