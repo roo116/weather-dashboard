@@ -23,6 +23,7 @@ var lon = "";
 var units = "imperial";
 var lang = "en";
 var places = {};
+var histBtnTarget = document.getElementsByClassName("btn city-btn");
 var locationButtonsEl = document.querySelector("#location-buttons");
 var placeHolderErrorTxt = "Make sure you enter a city name and that it's a real city."
 var placeHolderResetTxt = "Enter City Name Here"
@@ -39,6 +40,13 @@ function init() {
     };
     return;
   }
+
+  for (i = 0; i < places.city.length; i++) {
+    var restoreName = places.city[i]
+    histBtnTarget[i].innerHTML = restoreName;
+    histBtnTarget[i].dataset.location = restoreName;
+    return;
+  };
 
   // I want to get the most recent entries from object
   // I want to not show duplicates
@@ -59,6 +67,7 @@ function init() {
 
 
   // // create buttons
+
 
 
 
@@ -151,7 +160,6 @@ function storeHistory(name) {
 
   //and create a history button
 
-  var histBtnTarget = document.getElementsByClassName("btn city-btn");
   for (i = 0; i < histBtnTarget.length; i++) {
     var tempCity = cityArr[i];
     console.log("temp city = ", tempCity)
@@ -165,10 +173,11 @@ function storeHistory(name) {
     }
 
     if (tempCity !== name) {
-      cityArr[i] = name;
-      histBtnTarget[i].innerHTML = cityArr[i];
-      histBtnTarget[i].dataset.location = cityArr[i];
-      localStorage.setItem("places", JSON.stringify(places));
+      console.log("Ok so this now correctly thinks there is previous value")
+      // cityArr[i] = name;
+      // histBtnTarget[i].innerHTML = cityArr[i];
+      // histBtnTarget[i].dataset.location = cityArr[i];
+      // localStorage.setItem("places", JSON.stringify(places));
       break;
     }
 
