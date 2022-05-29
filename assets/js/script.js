@@ -43,52 +43,57 @@ function init() {
   //got this from stack overflow, how to remove duplicates from an array
 
   //HELPER FUNCTION -- createHistory()
-  var tempOut = [];
-  var tempObj = {};
-  places.city.reverse();
+  // var tempOut = [];
+  // var tempObj = {};
+  // places.city.reverse();
 
-  for (i = 0; i < places.city.length; i++) {
-    tempObj[places.city[i]] = 0;
-  }
-  for (i in tempObj) {
-    tempOut.push(i);
-  }
-  console.log("tempOut = ", tempOut);
-
-
-  // create buttons
+  // for (i = 0; i < places.city.length; i++) {
+  //   tempObj[places.city[i]] = 0;
+  // }
+  // for (i in tempObj) {
+  //   tempOut.push(i);
+  // }
+  // console.log("tempOut = ", tempOut);
 
 
-
-  var targEl = document.querySelector("#history-section");
-  // var buttonEl = document.createElement("button");
+  // // create buttons
 
 
-  if (tempOut.length > 7) {
-    var len = 7;
-    for (i = 0; i < len; i++) {
-      cityArr.push(tempOut[i]);
-    }
-  } else {
-    cityArr = tempOut
-  };
 
-  console.log("cityArr = ", cityArr);
+  // var targEl = document.querySelector("#history-section");
+  // // var buttonEl = document.createElement("button");
 
-  idx = cityArr.length;
 
-  cityArr.forEach(function (cityArr) {
-    console.log()
-    var buttonEl = document.createElement("button");
-    buttonEl.setAttribute("class", "btn btn-secondary");
-    buttonEl.textContent = cityArr;
-    targEl.appendChild(buttonEl);
-  })
+  // if (tempOut.length > 7) {
+  //   var len = 7;
+  //   for (i = 0; i < len; i++) {
+  //     cityArr.push(tempOut[i]);
+  //   }
+  // } else {
+  //   cityArr = tempOut
+  // };
+
+  // console.log("cityArr = ", cityArr);
+
+  // idx = cityArr.length;
+
+  // cityArr.forEach(function (cityArr) {
+  //   console.log()
+  //   var buttonEl = document.createElement("button");
+  //   buttonEl.setAttribute("class", "btn btn-secondary");
+  //   buttonEl.textContent = cityArr;
+  //   targEl.appendChild(buttonEl);
+  // })
   // END createHistory
 
 
 
 };
+
+
+
+
+
 
 // for (i = 0; i < len; i++) {
 //   var targEl = document.querySelector("#history-section");
@@ -117,6 +122,17 @@ function storeHistory(name) {
   places.city.push(name)
   console.log(places);
   localStorage.setItem("places", JSON.stringify(places));
+  document
+
+  //and create a history button
+   newbtnEl = document.createElement("button");
+   netbtnEl = 
+
+  //  var language = event.target.getAttribute("data-location");
+
+  // newbtnEl.setAttribute("class", "btn btn-secondary");
+  // newbtnEl.textContent = name;
+  // document.getElementById("history-section").childNodes.addAt(0, newbtnEl);
 
 }
 
