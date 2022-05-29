@@ -18,7 +18,6 @@ var cityName = ""
 var btnEl = document.querySelector(".btn");
 var secret = "10bdd765350b62b1d956051bc4e6292c";
 var cityArr = [];
-var btnArr = [];
 var lat = "";
 var lon = "";
 var units = "imperial";
@@ -42,11 +41,22 @@ function init() {
     return;
   }
 
+  var tempObj = {};
+  var tempArr = [];
+  // places.city.reverse();
+
   for (i = 0; i < places.city.length; i++) {
+    tempObj[places.city[i]] = 0;
+  }
+  for (i in tempObj) {
+    tempArr.push(i);
+  }
+
+  for (i = 0; i < tempArr.length; i++) {
     var restoreName = places.city[i]
     histBtnTarget[i].innerHTML = restoreName;
     histBtnTarget[i].dataset.location = restoreName;
-    return;
+
   };
 
   // I want to get the most recent entries from object
@@ -130,22 +140,6 @@ function init() {
 
 function storeHistory(name) {
 
-  places = JSON.parse(localStorage.getItem("places"));
-
-  console.log(places);;
-  var tempObj = {};
-  var tempArr = []
-  // places.city.reverse();
-
-  for (i = 0; i < places.city.length; i++) {
-    tempObj[places.city[i]] = 0;
-  }
-  for (i in tempObj) {
-    tempArr.push(i);
-  }
-  console.log("tempArr = ", tempArr);
-
-  cityArr = tempArr;
 
   // as soon as I hit enter on city save that to localStoragee
   console.log("This is the location: ", name)
@@ -153,54 +147,74 @@ function storeHistory(name) {
   // document
 
   //and create a history button
- 
+  var btnArr = [];
+
   for (i = 0; i < histBtnTarget.length; i++) {
     if (!histBtnTarget[i].dataset.location) {
       btnArr.push(histBtnTarget[i]);
     }
-
-    //   if (histBtnTarget[i].dataset.location = "") {
-    //     console.log(histBtnTarget)
-    //     btnArr.push(histBtnTarget[i]);
-
-    //     console.log(btnArr);
-
-    //   }
-
-    //   // console.log("temp city = ", tempCity)
-    //   // if (!tempCity) {
-    //   //   console.log("this element is blank so create a button");
-    //   //   histBtnTarget[i].innerHTML = name;
-    //   //   histBtnTarget[i].dataset.location = name;
-    //   //   places.city[i] = name
-    //   //   localStorage.setItem("places", JSON.stringify(places));
-    //   //   return;
-    //   // }
-    //   // if (tempCity === name) {
-    //   //   console.log("this city already has a button so we're done here")
-    //   //   // cityArr[i] = name;
-    //   //   // histBtnTarget[i].innerHTML = cityArr[i];
-    //   //   // histBtnTarget[i].dataset.location = cityArr[i];
-    //   //   // localStorage.setItem("places", JSON.stringify(places));
-    //   //   return;
-    //   // }
-
-    //   // console.log("Ok we need to create an addtional button")
-    //   // // get the next button in the array
-    //   // histBtnTarget[i].innerHTML = name;
-    //   // histBtnTarget[i].dataset.location = name;
-
-
-
-
-
-
-
-
-
-
   }
+
+
+  if (cityArr.indexOf(name) === -1) {
+    places.city.push(name);
+    localStorage.setItem("places", JSON.stringify(places));
+  }
+
+  for (i = 0; i < btnArr.length; i++) {
+    btnArr[0].innerHTML = name;
+    btnArr[0].dataset.location = name;
+  }
+
+
+
+
+
+
 };
+
+
+
+//   if (histBtnTarget[i].dataset.location = "") {
+//     console.log(histBtnTarget)
+//     btnArr.push(histBtnTarget[i]);
+
+//     console.log(btnArr);
+
+//   }
+
+//   // console.log("temp city = ", tempCity)
+//   // if (!tempCity) {
+//   //   console.log("this element is blank so create a button");
+//   //   histBtnTarget[i].innerHTML = name;
+//   //   histBtnTarget[i].dataset.location = name;
+//   //   places.city[i] = name
+//   //   localStorage.setItem("places", JSON.stringify(places));
+//   //   return;
+//   // }
+//   // if (tempCity === name) {
+//   //   console.log("this city already has a button so we're done here")
+//   //   // cityArr[i] = name;
+//   //   // histBtnTarget[i].innerHTML = cityArr[i];
+//   //   // histBtnTarget[i].dataset.location = cityArr[i];
+//   //   // localStorage.setItem("places", JSON.stringify(places));
+//   //   return;
+//   // }
+
+//   // console.log("Ok we need to create an addtional button")
+//   // // get the next button in the array
+//   // histBtnTarget[i].innerHTML = name;
+//   // histBtnTarget[i].dataset.location = name;
+
+
+
+
+
+
+
+
+
+
 
 //get all items in array and if any of them match 'name' then put set that one to [0] and break;
 // if it's not equal to that one then add the new name to the [0] location and remove the [7] location.
