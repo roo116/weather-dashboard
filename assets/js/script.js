@@ -153,9 +153,12 @@ function storeHistory(name) {
 
   var histBtnTarget = document.getElementsByClassName("btn city-btn");
   for (i = 0; i < histBtnTarget.length; i++) {
-    var tempCity = cityArr[i]
+    var tempCity = cityArr[i];
+    console.log("temp city = ", tempCity)
     if (!tempCity) {
       console.log("this element is blank so create a button");
+      histBtnTarget[i].innerHTML = name;
+      histBtnTarget[i].dataset.location = name;
       return;
     }
 
@@ -260,6 +263,8 @@ btnEl.addEventListener("click", function (event) {
 
 
       response.json().then(function (data) {
+        console.log(cityName)
+        debugger;
         storeHistory(cityName);
         wData = data;
 
