@@ -131,13 +131,6 @@ function storeHistory(name) {
 
   places = JSON.parse(localStorage.getItem("places"));
 
-
-  if (!places) {
-    places = {
-      city: [],
-    };
-  }
-
   console.log(places);;
   var tempObj = {};
   var tempArr = []
@@ -172,8 +165,8 @@ function storeHistory(name) {
       return;
     }
 
-    if (tempCity !== name) {
-      console.log("Ok so this now correctly thinks there is previous value")
+    if (tempCity === name) {
+      console.log("this city already has a button so we're done here")
       // cityArr[i] = name;
       // histBtnTarget[i].innerHTML = cityArr[i];
       // histBtnTarget[i].dataset.location = cityArr[i];
