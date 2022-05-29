@@ -159,6 +159,8 @@ function storeHistory(name) {
       console.log("this element is blank so create a button");
       histBtnTarget[i].innerHTML = name;
       histBtnTarget[i].dataset.location = name;
+      places.city[i] = name
+      localStorage.setItem("places", JSON.stringify(places));
       return;
     }
 
