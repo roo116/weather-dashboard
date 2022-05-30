@@ -14,17 +14,22 @@ ul {
   list-style-type: none;
 }
 
+/* .input-items {
+  margin: 0 2px;
+
+} */
+
 .current-weather-data {
-  height: 200px;
-  
+
 }
 
 .forecast {
   background-color: #273648;
   height: 200px;
   width: 15%;
+  margin: 2px;
 }
 
 .future-data-weather {
-  height: 250px;
+  height: 350px;
 }
