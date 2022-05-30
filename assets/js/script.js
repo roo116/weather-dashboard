@@ -54,6 +54,7 @@ function storeHistory(name) {
   console.log("Console loggin ", places);
 
   var btnArr = [];
+  debugger;
 
   for (i = 0; i < histBtnTarget.length; i++) {
     if (!histBtnTarget[i].dataset.location) {
@@ -61,16 +62,27 @@ function storeHistory(name) {
     }
   }
 
-  if (cityArr.indexOf(name) === -1) {
+  if (places.city.indexOf(name) !== -1) {
+    return;
+  }
+  else {
     places.city.push(name);
     localStorage.setItem("places", JSON.stringify(places));
+    var tempBtn = btnArr[0];
+    tempBtn.innerHTML = name;
+    tempBtn.className = "btn btn-secondary city-btn m-1"
+    tempBtn.dataset.location = name;
   }
 
-  for (i = 0; i < btnArr.length; i++) {
-    btnArr[0].innerHTML = name;
-    histBtnTarget[0].className = "btn btn-secondary city-btn m-1"
-    btnArr[0].dataset.location = name;
-  }
+  // for (i = 0; i < btnArr.length; i++) {
+  //   btnArr[i].innerHTML = name;
+  //   btnArr[0].className = "btn btn-secondary city-btn m-1"
+  //   btnArr[0].dataset.location = name;
+  // }
+
+
+
+
 };
 
 
