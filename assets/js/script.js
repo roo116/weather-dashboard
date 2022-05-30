@@ -68,7 +68,7 @@ function storeHistory(name) {
 
   for (i = 0; i < btnArr.length; i++) {
     btnArr[0].innerHTML = name;
-    histBtnTarget[i].className = "btn btn-secondary city-btn m-1"
+    histBtnTarget[0].className = "btn btn-secondary city-btn m-1"
     btnArr[0].dataset.location = name;
   }
 };

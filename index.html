@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header class="col-12 md-col-4 border border-dark">
+    <header class="col-12 md-col-4">
         <h1 class="text-center text-light fw-bold">Weather Dashboard</h1>
     </header>
 
@@ -21,7 +21,7 @@
         <!-- <section id='section-input'> -->
 
         <!-- from git-it-done -->
-        <div class="d-flex flex-column align-items-center input-items col-12 col-md-3 border border-dark">
+        <div class="d-flex flex-column align-items-center input-items col-12 col-md-3">
             <h3 class="mt-2 ms-3 w-10 fw-bold">Search for a City:</h3>
             <form id="search-form" class="">
                 <!-- <label class="form-label" for="username">Username</label> -->
@@ -82,50 +82,49 @@
             </div>
 
 
-
-            <div class="future-data-weather me-2">
+            <div class="future-data-weather me-2 mh-100">
                 <div class="">
                     <h3 class="ms-3 fw-bold mb-2 mt-2">5-day Forecast:</h3>
                 </div>
-
-                <div id="five-day" class="row justify-content-around align-items-center">
-                    <div id="d1" class="forecast border border-dark col-2">
-                        <p id="date1"></p>
-                        <img id="img-d1" src="" alt="">
-                        <p id="tmp-d1"></p>
-                        <p id="wind-d1"></p>
-                        <p id="hum-d1"></p>
-                    </div>
-                    <div id="d2" class="forecast border border-dark col-2">
-                        <p id="date2"></p>
-                        <img id="img-d2" src="" alt="">
-                        <p id="tmp-d2"></p>
-                        <p id="wind-d2"></p>
-                        <p id="hum-d2"></p>
-                    </div>
-                    <div id="d3" class="forecast border border-dark col-2">
-                        <p id="date3"></p>
-                        <img id="img-d3" src="" alt="">
-                        <p id="tmp-d3"></p>
-                        <p id="wind-d3"></p>
-                        <p id="hum-d3"></p>
-                    </div>
-                    <div id="d4" class="forecast border border-dark col-2">
-                        <p id="date4"></p>
-                        <img id="img-d4" src="" alt="">
-                        <p id="tmp-d4"></p>
-                        <p id="wind-d4"></p>
-                        <p id="hum-d4"></p>
-                    </div>
-                    <div id="d5" class="forecast border border-dark col-2 ">
-                        <p id="date5"></p>
-                        <img id="img-d5" src="" alt="">
-                        <p id="tmp-d5"></p>
-                        <p id="wind-d5"></p>
-                        <p id="hum-d5"></p>
+                <div class="container">
+                    <div id="five-day" class="row justify-content-around align-items-center text-light">
+                        <div id="d1" class="forecast border border-dark col-2">
+                            <p id="date1" class="fw-bold"></p>
+                            <img id="img-d1" src="" alt="">
+                            <p id="tmp-d1"></p>
+                            <p id="wind-d1"></p>
+                            <p id="hum-d1"></p>
+                        </div>
+                        <div id="d2" class="forecast border border-dark col-2">
+                            <p id="date2" class="fw-bold"></p>
+                            <img id="img-d2" src="" alt="">
+                            <p id="tmp-d2"></p>
+                            <p id="wind-d2"></p>
+                            <p id="hum-d2"></p>
+                        </div>
+                        <div id="d3" class="forecast border border-dark col-2">
+                            <p id="date3" class="fw-bold"></p>
+                            <img id="img-d3" src="" alt="">
+                            <p id="tmp-d3"></p>
+                            <p id="wind-d3"></p>
+                            <p id="hum-d3"></p>
+                        </div>
+                        <div id="d4" class="forecast border border-dark col-2">
+                            <p id="date4" class="fw-bold"></p>
+                            <img id="img-d4" src="" alt="">
+                            <p id="tmp-d4"></p>
+                            <p id="wind-d4"></p>
+                            <p id="hum-d4"></p>
+                        </div>
+                        <div id="d5" class="forecast border border-dark col-2 ">
+                            <p id="date5" class="fw-bold"></p>
+                            <img id="img-d5" src="" alt="">
+                            <p id="tmp-d5"></p>
+                            <p id="wind-d5"></p>
+                            <p id="hum-d5"></p>
+                        </div>
                     </div>
                 </div>
-
 
             </div>
 
