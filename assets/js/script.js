@@ -54,7 +54,6 @@ function storeHistory(name) {
   console.log("Console loggin ", places);
 
   var btnArr = [];
-  debugger;
 
   for (i = 0; i < histBtnTarget.length; i++) {
     if (!histBtnTarget[i].dataset.location) {
@@ -109,6 +108,7 @@ function frmBtnClickHander(event) {
 // function to capture weather data and build the html with the output
 function getWeather(event) {
   var apiUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${secret}&units=${units}`;
+
   var wData = "";
   fetch(apiUrl1).then(function (response) {
     if (!response.ok) {
