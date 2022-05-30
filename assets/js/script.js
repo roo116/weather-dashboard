@@ -41,6 +41,7 @@ function init() {
   for (i = 0; i < tempArr.length; i++) {
     var restoreName = places.city[i]
     histBtnTarget[i].innerHTML = restoreName;
+    histBtnTarget[i].className = "btn btn-secondary city-btn m-1"
     histBtnTarget[i].dataset.location = restoreName;
 
   };
@@ -67,6 +68,7 @@ function storeHistory(name) {
 
   for (i = 0; i < btnArr.length; i++) {
     btnArr[0].innerHTML = name;
+    histBtnTarget[i].className = "btn btn-secondary city-btn m-1"
     btnArr[0].dataset.location = name;
   }
 };

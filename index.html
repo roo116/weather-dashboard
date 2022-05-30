@@ -16,48 +16,48 @@
         <h1 class="text-center">Weather Dashboard</h1>
     </header>
 
-    <main class="container">
-        <section id='section-input' class="row">
+    <main class="d-flex flex-row justify-content-around">
+        <!-- <section id='section-input'> -->
 
-            <!-- from git-it-done -->
-            <div class="col-12 col-md-4">
-                <div class="card">
-                    <h3 class="card-header text-uppercase">Search for a City:</h3>
-                    <form id="search-form" class="card-body">
-                        <!-- <label class="form-label" for="username">Username</label> -->
-                        <!-- <input name="username" id="username" type="text" autofocus="true" class="form-input"> -->
-                        <div class="d-grid">
-                            <input name="city" id="city-input" type="text" autofocus="true" class="form-input"
-                                placeholder="Enter City Name Here" />
-                        </div>
-                        <div class="d-grid mt-2">
-                            <button type="submit" class="btn btn-primary">How's the weather?</button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="card">
-                    <!-- <h3 class="card-header text-uppercase">Search By Topic</h3> -->
-                    <div id="location-buttons" class="card-body">
-                        <button id=btn-0 data-location="" class="btn city-btn"></button>
-                        <button id=btn-1 data-location="" class="btn city-btn"></button>
-                        <button id=btn-2 data-location="" class="btn city-btn"></button>
-                        <button id=btn-3 data-location="" class="btn city-btn"></button>
-                        <button id=btn-4 data-location="" class="btn city-btn"></button>
-                        <button id=btn-5 data-location="" class="btn city-btn"></button>
-                        <button id=btn-6 data-location="" class="btn city-btn"></button>
-                        <button id=btn-7 data-location="" class="btn city-btn"></button>
+        <!-- from git-it-done -->
+        <div class="col-12 col-md-3">
+            <div class="card">
+                <h3 class="mt-2 ms-3 w-10">Search for a City:</h3>
+                <form id="search-form" class="card-body">
+                    <!-- <label class="form-label" for="username">Username</label> -->
+                    <!-- <input name="username" id="username" type="text" autofocus="true" class="form-input"> -->
+                    <div class="d-grid">
+                        <input name="city" id="city-input" type="text" autofocus="true" class="form-input"
+                            placeholder="Enter City Name Here" />
                     </div>
-                </div>
+                    <div class="d-grid mt-2">
+                        <button type="submit" class="btn btn-primary">How's the weather?</button>
+                    </div>
+                </form>
             </div>
 
-        </section>
+            <div class="card">
+                <!-- <h3 class="card-header text-uppercase">Search By Topic</h3> -->
+                <div id="location-buttons" class="card-body d-grid mt-2">
+                    <button id=btn-0 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-1 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-2 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-3 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-4 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-5 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-6 data-location="" class="btn city-btn m-1"></button>
+                    <button id=btn-7 data-location="" class="btn city-btn m-1"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- </section> -->
 
 
 
-        <section id="weather-data" class="border border-dark col-8">
+        <section id="weather-data" class="border border-dark col-9 w-1">
 
-            <div class="current-weather-data">
+            <div class="current-weather-data border border-dark me-2">
                 <div id="city-name" class="fs-1"></div>
                 <div id="city-date" class="fs-2"></div>
                 <div class="icon">
@@ -86,42 +86,41 @@
 
 
 
-
-            <div class="future-data-weather border border-dark">
+            <div class="future-data-weather border border-dark me-2">
                 <div class="">
-                    <h3>5-day Forecast</h3>
+                    <h3>5-day Forecast:</h3>
                 </div>
 
                 <div id="five-day" class="container row justify-content-around">
-                    <div class="card border border-dark col-2">
+                    <div id="d1" class="forecast border border-dark col-2">
                         <p id="date1"></p>
                         <img id="img-d1" src="" alt="">
                         <p id="tmp-d1"></p>
                         <p id="wind-d1"></p>
                         <p id="hum-d1"></p>
                     </div>
-                    <div id="d2" class="card border border-dark col-2">
+                    <div id="d2" class="forecast border border-dark col-2">
                         <p id="date2"></p>
                         <img id="img-d2" src="" alt="">
                         <p id="tmp-d2"></p>
                         <p id="wind-d2"></p>
                         <p id="hum-d2"></p>
                     </div>
-                    <div id="d3" class="card border border-dark col-2">
+                    <div id="d3" class="forecast border border-dark col-2">
                         <p id="date3"></p>
                         <img id="img-d3" src="" alt="">
                         <p id="tmp-d3"></p>
                         <p id="wind-d3"></p>
                         <p id="hum-d3"></p>
                     </div>
-                    <div id="d4" class="card border border-dark col-2">
+                    <div id="d4" class="forecast border border-dark col-2">
                         <p id="date4"></p>
                         <img id="img-d4" src="" alt="">
                         <p id="tmp-d4"></p>
                         <p id="wind-d4"></p>
                         <p id="hum-d4"></p>
                     </div>
-                    <div id="d5" class="card border border-dark col-2 ">
+                    <div id="d5" class="forecast border border-dark col-2 ">
                         <p id="date5"></p>
                         <img id="img-d5" src="" alt="">
                         <p id="tmp-d5"></p>
