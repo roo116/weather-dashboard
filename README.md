@@ -13,7 +13,7 @@ In addition the site will add buttons of recent searches for frequently visited 
 Here is a sample of the output:
 ![](./assets/images/weather-dashboard.png)
 
-## known issues
+## Known Issues
 
 On load there is no data in the web-page, and the page only populates when information is entered. Solution would be to use geolocation data to automatically fill that on load. Planned for next release.
 
