@@ -50,9 +50,6 @@ function init() {
 // move the city name to localstorage for use in history button list
 function storeHistory(name) {
 
-  console.log("This is the location: ", name)
-  console.log("Console loggin ", places);
-
   var btnArr = [];
 
   for (i = 0; i < histBtnTarget.length; i++) {
@@ -100,7 +97,6 @@ function frmBtnClickHander(event) {
   cityName = cityName.value.trim()
   cityName = cityName.toLowerCase();
   if (cityName) {
-    storeHistory(cityName);
     getWeather(cityName);
   };
 };
@@ -108,6 +104,7 @@ function frmBtnClickHander(event) {
 // function to capture weather data and build the html with the output
 function getWeather(event) {
   var apiUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${secret}&units=${units}`;
+
 
   var wData = "";
   fetch(apiUrl1).then(function (response) {
@@ -118,14 +115,15 @@ function getWeather(event) {
     }
 
     if (response.ok) {
-      var now = dayjs().format("MM/DD/YYYY");
-      console.log("dayJs says now is " + now);
-      document.querySelector("#city-name").textContent = cityName;
-      document.querySelector("#city-date").textContent = now;
 
       response.json().then(function (data) {
-        console.log(cityName);
         wData = data;
+        cityName = wData.name;
+        storeHistory(cityName);
+
+        var now = dayjs().format("MM/DD/YYYY");
+        document.querySelector("#city-name").textContent = cityName;
+        document.querySelector("#city-date").textContent = now;
 
         var iconCode = wData.weather[0].icon;
         var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
@@ -137,20 +135,13 @@ function getWeather(event) {
         var currWind = wData.wind.speed;
         var currHum = wData.main.humidity;
 
-        // var tempEl = document.createElement("p");
         var tempElTarget = document.querySelector("#current-temp");
-        // tempElTarget.appendChild(tempEl);
         tempElTarget.textContent = "Temp: " + currTemp + "°F"; //degree symbol = alt + 0176 for PC. Option-Shift-8 for mac
-        // console.log(tempElTarget);
 
-        // var windEl = document.createElement("p");
         var windElTarget = document.querySelector("#current-wind");
-        // windElTarget.appendChild(windEl);
         windElTarget.textContent = "Wind: " + currWind + " MPH";
 
-        // var humEl = document.createElement("p");
         var humElTarget = document.querySelector("#current-humidity");
-        // humElTarget.appendChild(windEl);
         humElTarget.textContent = "Humdity: " + currHum + "%";
 
         //need to caputure lat and lon of city, lets do that here
@@ -159,7 +150,7 @@ function getWeather(event) {
 
         var apiUrl2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${secret}&units=${units}&lang=${lang}`
         fetch(apiUrl2).then(function (response) {
-          console.log("apiUrl2 " + response);
+
           if (!response.ok) {
             console.error(response);
             return;
@@ -180,27 +171,22 @@ function getWeather(event) {
 
 
               if (rating >= 0 && rating <= 2) {
-                console.log("green")
                 document.querySelector("span").setAttribute("style", "background-color: green");
               };
 
               if (rating > 2 && rating <= 5) {
-                console.log("yellow")
                 document.querySelector("span").setAttribute("style", "background-color: yellow");
               };
 
               if (rating > 5 && rating <= 7) {
-                console.log("orange");
                 document.querySelector("span").setAttribute("style", "background-color: orange");
               };
 
               if (rating > 7 && rating <= 10) {
-                console.log("red");
                 document.querySelector("span").setAttribute("style", "background-color: red");
               };
 
               if (rating > 11) {
-                console.log("purple");
                 document.querySelector("span").setAttribute("style", "background-color: purple");
               };
 
