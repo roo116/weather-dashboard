@@ -1,3 +1,6 @@
+
+// Global Variables
+
 var cityName = ""
 var btnEl = document.querySelector(".btn");
 var secret = "10bdd765350b62b1d956051bc4e6292c";
@@ -12,11 +15,10 @@ var locationButtonsEl = document.querySelector("#location-buttons");
 var placeHolderErrorTxt = "Make sure you enter a city name and that it's a real city."
 var placeHolderResetTxt = "Enter City Name Here"
 
+// intialize the web application
 function init() {
 
-
   places = JSON.parse(localStorage.getItem("places"));
-
 
   if (!places) {
     places = {
@@ -25,9 +27,9 @@ function init() {
     return;
   }
 
+  // full disclosure - go this snippet from stackoverflow and I am forever grateful for it too!!!
   var tempObj = {};
   var tempArr = [];
-  // places.city.reverse();
 
   for (i = 0; i < places.city.length; i++) {
     tempObj[places.city[i]] = 0;
@@ -42,95 +44,14 @@ function init() {
     histBtnTarget[i].dataset.location = restoreName;
 
   };
-
-  // I want to get the most recent entries from object
-  // I want to not show duplicates
-  //got this from stack overflow, how to remove duplicates from an array
-
-  //HELPER FUNCTION -- createHistory()
-  // var tempOut = [];
-  // var tempObj = {};
-  // places.city.reverse();
-
-  // for (i = 0; i < places.city.length; i++) {
-  //   tempObj[places.city[i]] = 0;
-  // }
-  // for (i in tempObj) {
-  //   tempOut.push(i);
-  // }
-  // console.log("tempOut = ", tempOut);
-
-
-  // // create buttons
-
-
-
-
-  // var targEl = document.querySelector("#history-section");
-  // // var buttonEl = document.createElement("button");
-
-
-  // if (tempOut.length > 7) {
-  //   var len = 7;
-  //   for (i = 0; i < len; i++) {
-  //     cityArr.push(tempOut[i]);
-  //   }
-  // } else {
-  //   cityArr = tempOut
-  // };
-
-  // console.log("cityArr = ", cityArr);
-
-  // idx = cityArr.length;
-
-  // cityArr.forEach(function (cityArr) {
-  //   console.log()
-  //   var buttonEl = document.createElement("button");
-  //   buttonEl.setAttribute("class", "btn btn-secondary");
-  //   buttonEl.textContent = cityArr;
-  //   targEl.appendChild(buttonEl);
-  // })
-  // END createHistory
-
-
-
 };
 
-
-
-
-
-
-// for (i = 0; i < len; i++) {
-//   var targEl = document.querySelector("#history-section");
-//   buttonEl.setAttribute("id", "button-" + [i]);
-//   targEl.appendChild(buttonEl;
-//   buttonEl.innerHTML = tempOut[i];
-
-// }
-
-
-
-
-//   for(i=0; i<places.length || i < 7; i++) {
-
-//   }
-//   historyBtn = document.createElement("button");
-// document.appendChild(historyBtn)
-
-
-
-
-
+// move the city name to localstorage for use in history button list
 function storeHistory(name) {
 
-
-  // as soon as I hit enter on city save that to localStoragee
   console.log("This is the location: ", name)
   console.log("Console loggin ", places);
-  // document
 
-  //and create a history button
   var btnArr = [];
 
   for (i = 0; i < histBtnTarget.length; i++) {
@@ -138,7 +59,6 @@ function storeHistory(name) {
       btnArr.push(histBtnTarget[i]);
     }
   }
-
 
   if (cityArr.indexOf(name) === -1) {
     places.city.push(name);
@@ -149,104 +69,30 @@ function storeHistory(name) {
     btnArr[0].innerHTML = name;
     btnArr[0].dataset.location = name;
   }
-
-
-
-
-
-
 };
 
 
-
-//   if (histBtnTarget[i].dataset.location = "") {
-//     console.log(histBtnTarget)
-//     btnArr.push(histBtnTarget[i]);
-
-//     console.log(btnArr);
-
-//   }
-
-//   // console.log("temp city = ", tempCity)
-//   // if (!tempCity) {
-//   //   console.log("this element is blank so create a button");
-//   //   histBtnTarget[i].innerHTML = name;
-//   //   histBtnTarget[i].dataset.location = name;
-//   //   places.city[i] = name
-//   //   localStorage.setItem("places", JSON.stringify(places));
-//   //   return;
-//   // }
-//   // if (tempCity === name) {
-//   //   console.log("this city already has a button so we're done here")
-//   //   // cityArr[i] = name;
-//   //   // histBtnTarget[i].innerHTML = cityArr[i];
-//   //   // histBtnTarget[i].dataset.location = cityArr[i];
-//   //   // localStorage.setItem("places", JSON.stringify(places));
-//   //   return;
-//   // }
-
-//   // console.log("Ok we need to create an addtional button")
-//   // // get the next button in the array
-//   // histBtnTarget[i].innerHTML = name;
-//   // histBtnTarget[i].dataset.location = name;
-
-
-
-
-
-
-
-
-
-
-
-//get all items in array and if any of them match 'name' then put set that one to [0] and break;
-// if it's not equal to that one then add the new name to the [0] location and remove the [7] location.
-// create event listeners like I did in the code quiz challenge.  attach those to the function getWeather Function and create the getWeather function.
-
-
-//   histBtnTarget[i].innerHTML = name;
-//   debugger;
-//   break;
-// } else {
-
-
-// }
-
-
-
-//  var language = event.target.getAttribute("data-location");
-
-// newbtnEl.setAttribute("class", "btn btn-secondary");
-// newbtnEl.textContent = name;
-// document.getElementById("history-section").childNodes.addAt(0, newbtnEl);
-
-
-init();
-
-// function getWeather(location) {
-//   console.log(location);
-
-// };
-
-
-
-
-
+// manipulate some information when a history button is clicked
 function btnClickHandler(event) {
   cityName = event.target.getAttribute("data-location");
   if (cityName) {
     getWeather(location);
-
-    //     // clear old content
-    //     // repoContainerEl.textContent = "";
   }
 };
 
-locationButtonsEl.addEventListener("click", btnClickHandler);
+// maniputlet some information when the form data is submitted
+function frmBtnClickHander(event) {
+  event.preventDefault();
+  cityName = document.querySelector("input");
+  cityName = cityName.value.trim()
+  cityName = cityName.toLowerCase();
+  if (cityName) {
+    storeHistory(cityName);
+    getWeather(cityName);
+  };
+};
 
-
-
+// function to capture weather data and build the html with the output
 function getWeather(event) {
   var apiUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${secret}&units=${units}`;
   var wData = "";
@@ -375,16 +221,7 @@ function getWeather(event) {
   });
 };
 
-function frmBtnClickHander(event) {
-  event.preventDefault();
-  cityName = document.querySelector("input");
-  cityName = cityName.value.trim()
-  cityName = cityName.toLowerCase();
-  if (cityName) {
-    storeHistory(cityName);
-    getWeather(cityName);
-  };
-}
 
-
+init();
 btnEl.addEventListener("click", frmBtnClickHander)
+locationButtonsEl.addEventListener("click", btnClickHandler);
