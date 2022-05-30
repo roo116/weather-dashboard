@@ -21,8 +21,7 @@
         <!-- <section id='section-input'> -->
 
         <!-- from git-it-done -->
-        <div
-            class="d-flex flex-column align-items-center input-items col-12 col-md-3 border border-dark">
+        <div class="d-flex flex-column align-items-center input-items col-12 col-md-3 border border-dark">
             <h3 class="mt-2 ms-3 w-10 fw-bold">Search for a City:</h3>
             <form id="search-form" class="">
                 <!-- <label class="form-label" for="username">Username</label> -->
@@ -40,7 +39,8 @@
 
             <div class="container">
                 <!-- <h3 class="card-header text-uppercase">Search By Topic</h3> -->
-                <div id="location-buttons" class="d-flex flex-column mt-2 border-top border-dark justify-content-center" >
+                <div id="location-buttons"
+                    class="d-flex flex-column mt-2 border-top border-dark justify-content-center">
                     <button id=btn-0 data-location="" class="btn city-btn m-1"></button>
                     <button id=btn-1 data-location="" class="btn city-btn m-1"></button>
                     <button id=btn-2 data-location="" class="btn city-btn m-1"></button>
@@ -58,13 +58,18 @@
 
 
         <section id="weather-data" class="col-9 w-1">
+            <div class="current-weather-data border border-dark me-2 ms-2">
 
-            <div class="current-weather-data row border border-dark me-2">
-                <div id="city-name" class="fs-1"></div>
-                <div id="city-date" class="fs-2"></div>
-                <div class="icon">
-                    <img id="icon-url" src="" alt="">
+                <div class="container">
+                    <div class="d-flex flex-row">
+                        <div id="city-name" class="fs-2 ms-2 fw-bold"></div>
+                        <div id="city-date" class="fs-4 m-2"></div>
+                        <div class="icon">
+                            <img id="icon-url" src="" alt="">
+                        </div>
+                    </div>
                 </div>
+
 
                 <ul>
                     <li id="current-temp"></li>
@@ -74,7 +79,7 @@
                 </ul>
 
             </div>
-
+            </div>
 
 
 

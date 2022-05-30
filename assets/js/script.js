@@ -163,7 +163,7 @@ function getWeather(event) {
               var uviEl = document.createElement("p");
               var uviTarget = document.querySelector("#current-uvi");
               uviTarget.appendChild(uviEl);
-              uviTarget.innerHTML = "UV Index: " + "<span class='rating'>" + currUvi + "</span>";
+              uviTarget.innerHTML = "UV Index: " + "<span class='rating badge badge-primary badge-pill'>" + currUvi + "</span>";
               rating = Math.floor(currUvi)
 
 
