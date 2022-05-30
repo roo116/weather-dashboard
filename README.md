@@ -6,10 +6,16 @@ Welcome to the Weather Dashboard.
 
 This application uses Open Weather Map API's to display current weather conditions, and a five day forecast based on user input.
 
+Enter a city name and click the `How's the weather?` button.
+
 In addition the site will add buttons of recent searches for frequently visited locations!
 
 Here is a sample of the output:
-![](./assets/images/Screen%20Shot%202022-05-30%20at%204.01.51%20AM.png)
+![](./assets/images/weather-dashboard.png)
+
+## known issues
+
+On load there is no data in the web-page, and the page only populates when information is entered. Solution would be to use geolocation data to automatically fill that on load. Planned for next release.
 
 ## User Story
 
